@@ -1,29 +1,5 @@
 [
   {
-    "type": "builtin",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "builtin_kw",
-          "named": true
-        },
-        {
-          "type": "operand_args",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "builtin_kw",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "directive",
     "named": true,
     "fields": {},
@@ -31,10 +7,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "builtin",
-          "named": true
-        },
         {
           "type": "ins",
           "named": true
@@ -178,25 +150,6 @@
   {
     "type": "section",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "section_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "section_type",
-    "named": true,
     "fields": {}
   },
   {
@@ -276,22 +229,6 @@
   {
     "type": "comment",
     "named": true
-  },
-  {
-    "type": "db",
-    "named": false
-  },
-  {
-    "type": "dd",
-    "named": false
-  },
-  {
-    "type": "dq",
-    "named": false
-  },
-  {
-    "type": "dw",
-    "named": false
   },
   {
     "type": "escape_sequence",

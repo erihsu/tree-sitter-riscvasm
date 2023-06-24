@@ -17,45 +17,12 @@ module.exports = grammar({
     comment: ($) => /[#]([^\\n]*)/,
     directive: ($) =>
       choice(
-        prec.left(12, $.ins),
-        // prec.left(11, $.shell_cmd),
-        // prec.left(10, $.objdump_file_format),
-        // prec.left(9, $.objdump_disas_of_section),
-        // prec.left(8, $.objdump_section_label),
-        // prec.left(7, $.objdump_offset_label),
-        prec.left(4, $.section),
-        // prec.left(5, $.data_section),
-        // prec.left(4, $.code_section),
-        prec.left(3, $.builtin),
+        prec.left(3, $.ins),
+        prec.left(2, $.section),
         prec.left(1, $.label),
       ),
 
-    builtin: ($) => seq($.builtin_kw, $.operand_args),
-    builtin_kw: ($) => choice("db", "dw", "dd", "dq"),
-
-    section: ($) => seq($.section_type, $._NEWLINE),
-    section_type: ($) => choice(".text",".data",".wodata"),
-    // extern: ($) => seq("extern", $.identifier),
-    // code_section: ($) => seq(".text", $.identifier),
-
-    // shell_cmd: ($) => seq($.shell_prompt, /[^\n]*/),
-    // shell_prompt: ($) => "$",
-
-    // objdump_disas_of_section: ($) =>
-    //   seq("Disassembly of section ", $.section_name, ":"),
-
-    // objdump_file_format: ($) => /[a-zA-Z0-9/.@_-]+:[\s]+file format [^\n]+/,
-
-    // objdump_section_label: ($) =>
-    //   seq($.objdump_addr, "<", $.identifier, ">", ":"),
-    objdump_addr: ($) => prec(0, /[0-9a-fA-F]+/),
-
-    // objdump_offset_label: ($) =>
-    //   prec.left(
-    //     0,
-    //     seq($.objdump_addr, ":", $.objdump_machine_code_bytes, optional($.ins)),
-    //   ),
-    objdump_machine_code_bytes: ($) => repeat1(/[0-9a-fA-F]{2}/),
+    section: ($) => choice(".text",".data",".wodata"),
 
     label: ($) =>
       prec.left(0, seq($.label_name, /:[\s]+/, optional($.directive))),
@@ -68,7 +35,6 @@ module.exports = grammar({
       seq(
         choice(
           $.register,
-          // $.effective_addr,
           $.string_literal,
           $.integer_literal,
           $.operand_ident,
@@ -91,29 +57,6 @@ module.exports = grammar({
       ),
 
     operand_ident: ($) => $._IDENTIFIER,
-
-    // effective_addr: ($) =>
-    //   seq(
-    //     "[",
-    //     repeat1(
-    //       choice(
-    //         $.segment_prefix,
-    //         $.register,
-    //         $.integer_literal,
-    //         "(",
-    //         ")",
-    //         "*",
-    //         "+",
-    //         "-",
-    //         $._IDENTIFIER,
-    //       ),
-    //     ),
-    //     "]",
-    //   ),
-
-    // segment_prefix: ($) => seq($.segment, ":"),
-
-    // segment: ($) => choice("cs", "ds", "es", "fs", "gs", "ss"),
 
     // shamelessly stolen from <https://github.com/tree-sitter/tree-sitter-c/>
     escape_sequence: ($) =>
@@ -177,5 +120,7 @@ module.exports = grammar({
     section_name: ($) => /[.][A-Za-z0-9.@_-]+/,
     identifier: ($) => $._IDENTIFIER,
     _IDENTIFIER: ($) => token(prec(-1, /[A-Za-z.@_][A-Za-z0-9.@_$-]*/)),
+
+    _DELIMITER: ($) => token(";"),
   },
 });

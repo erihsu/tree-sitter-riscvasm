@@ -99,7 +99,7 @@
       "members": [
         {
           "type": "PREC_LEFT",
-          "value": 12,
+          "value": 3,
           "content": {
             "type": "SYMBOL",
             "name": "ins"
@@ -107,18 +107,10 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 4,
+          "value": 2,
           "content": {
             "type": "SYMBOL",
             "name": "section"
-          }
-        },
-        {
-          "type": "PREC_LEFT",
-          "value": 3,
-          "content": {
-            "type": "SYMBOL",
-            "name": "builtin"
           }
         },
         {
@@ -131,54 +123,7 @@
         }
       ]
     },
-    "builtin": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "builtin_kw"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "operand_args"
-        }
-      ]
-    },
-    "builtin_kw": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "db"
-        },
-        {
-          "type": "STRING",
-          "value": "dw"
-        },
-        {
-          "type": "STRING",
-          "value": "dd"
-        },
-        {
-          "type": "STRING",
-          "value": "dq"
-        }
-      ]
-    },
     "section": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "section_type"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_NEWLINE"
-        }
-      ]
-    },
-    "section_type": {
       "type": "CHOICE",
       "members": [
         {
@@ -194,21 +139,6 @@
           "value": ".wodata"
         }
       ]
-    },
-    "objdump_addr": {
-      "type": "PREC",
-      "value": 0,
-      "content": {
-        "type": "PATTERN",
-        "value": "[0-9a-fA-F]+"
-      }
-    },
-    "objdump_machine_code_bytes": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "PATTERN",
-        "value": "[0-9a-fA-F]{2}"
-      }
     },
     "label": {
       "type": "PREC_LEFT",
@@ -638,6 +568,13 @@
           "type": "PATTERN",
           "value": "[A-Za-z.@_][A-Za-z0-9.@_$-]*"
         }
+      }
+    },
+    "_DELIMITER": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": ";"
       }
     }
   },
