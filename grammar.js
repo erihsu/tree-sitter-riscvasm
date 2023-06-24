@@ -1,3 +1,5 @@
+// reference: https://michaeljclark.github.io/asm.html
+
 module.exports = grammar({
   name: "riscvasm",
 
@@ -14,22 +16,34 @@ module.exports = grammar({
         ),
       ),
 
-    comment: ($) => /[#]([^\\n]*)/,
+    comment: ($) => /[#]([^\n]*)/,
     directive: ($) =>
       choice(
-        prec.left(3, $.ins),
+        prec.left(4, $.ins), // instruction
+        prec.left(3, $.decl), // variable declare
         prec.left(2, $.section),
         prec.left(1, $.label),
       ),
 
-    section: ($) => choice(".text",".data",".wodata"),
+    decl: ($) => prec.left(0,seq($.identifier,$.builtin_kw,$.integer_literal)),
+
+    builtin_kw: ($) =>
+      token(
+        prec(
+          1,
+          /dword|word|half|long/,
+        ),
+      ),
+
+    section: ($) => prec.left(0,seq($.section_name)), // section selection
+    section_name: ($) => choice(".text",".data",".rodata",".bss"),
 
     label: ($) =>
       prec.left(0, seq($.label_name, /:[\s]+/, optional($.directive))),
     label_name: ($) => $.identifier,
-    ins: ($) => prec.left(0, seq($.mnemonic, optional($.operand_args))),
+    ins: ($) => prec.left(0, seq($.mnemonic, $.operand_args)), // target should be register ,all instruction has args
 
-    operand_args: ($) => seq($.operand, repeat(seq(" ", $.operand))),
+    operand_args: ($) => seq($.operand, repeat(seq(",", $.operand))),
 
     operand: ($) =>
       seq(
@@ -44,11 +58,15 @@ module.exports = grammar({
     register: ($) =>
       token(
         choice(
-          /[xX][0-31]/,
-          /[t][0-6]/,
-          /[a][0-7]/,
-          /[s][0-11]/,
-          "zero",
+          /[xX][0-9]/,
+          /[xX]1[0-9]/,
+          /[xX]2[0-9]/,
+          /[xX]3[0-1]/,
+          /[tT][0-6]/,
+          /[aA][0-7]/,
+          /[sS][0-9]/,
+          /[sS]1[0-1]/,
+          "zero", // alias
           "ra",
           "sp",
           "gp",
@@ -58,7 +76,7 @@ module.exports = grammar({
 
     operand_ident: ($) => $._IDENTIFIER,
 
-    // shamelessly stolen from <https://github.com/tree-sitter/tree-sitter-c/>
+    // copy from tree-sitter-x86asm project
     escape_sequence: ($) =>
       token(
         prec(
@@ -117,7 +135,6 @@ module.exports = grammar({
           /add|sub|xor|or|and|sll|srl|sra|slt|sltu|addi|xori|ori|andi|slli|srli|srai|slti|sltiu|lb|lh|lw|lbu|lhu|sb|sh|sw|beq|bne|blt|bge|bltu|bgeu|jal|jalr|lui|auipc|ecall|ebreak/,
         ),
       ),
-    section_name: ($) => /[.][A-Za-z0-9.@_-]+/,
     identifier: ($) => $._IDENTIFIER,
     _IDENTIFIER: ($) => token(prec(-1, /[A-Za-z.@_][A-Za-z0-9.@_$-]*/)),
 

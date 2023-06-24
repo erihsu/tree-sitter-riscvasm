@@ -1,5 +1,28 @@
 [
   {
+    "type": "decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "builtin_kw",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "directive",
     "named": true,
     "fields": {},
@@ -7,6 +30,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "decl",
+          "named": true
+        },
         {
           "type": "ins",
           "named": true
@@ -150,6 +177,21 @@
   {
     "type": "section",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "section_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "section_name",
+    "named": true,
     "fields": {}
   },
   {
@@ -195,10 +237,6 @@
     "named": false
   },
   {
-    "type": " ",
-    "named": false
-  },
-  {
     "type": "\"",
     "named": false
   },
@@ -207,15 +245,23 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ".bss",
+    "named": false
+  },
+  {
     "type": ".data",
     "named": false
   },
   {
-    "type": ".text",
+    "type": ".rodata",
     "named": false
   },
   {
-    "type": ".wodata",
+    "type": ".text",
     "named": false
   },
   {
@@ -225,6 +271,10 @@
   {
     "type": ">",
     "named": false
+  },
+  {
+    "type": "builtin_kw",
+    "named": true
   },
   {
     "type": "comment",
