@@ -304,11 +304,6 @@
     }
   },
   {
-    "type": "relocation_load_store_type",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "section",
     "named": true,
     "fields": {},
@@ -367,9 +362,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "operand_args",
+          "named": true
+        },
         {
           "type": "symbol_scope",
           "named": true
@@ -392,14 +391,6 @@
   },
   {
     "type": "\"",
-    "named": false
-  },
-  {
-    "type": "%lo",
-    "named": false
-  },
-  {
-    "type": "%pcrel_lo",
     "named": false
   },
   {
@@ -571,7 +562,7 @@
     "named": true
   },
   {
-    "type": "tprel_lo",
-    "named": false
+    "type": "relocation_load_store_type",
+    "named": true
   }
 ]

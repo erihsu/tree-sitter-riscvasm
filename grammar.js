@@ -41,7 +41,7 @@ module.exports = grammar({
     alignment: ($) => prec.left(0,seq($.align_type)), // alignment selection
     align_type: ($) => choice(".align",".balign","p2align"),
 
-    symbol_def: ($) => prec.left(0,seq($.symbol_scope)), // symbol definition
+    symbol_def: ($) => prec.left(0,seq($.symbol_scope,$.operand_args)), // symbol definition
     symbol_scope: ($) => choice(".globl",".local",".equ"),
 
     misc_func: ($) => prec.left(0,seq($.misc_func_type)), // symbol definition
@@ -109,7 +109,10 @@ module.exports = grammar({
 
 
     relocation_load_store: ($) => seq($.relocation_load_store_type,'(',$.label_name,')'),
-    relocation_load_store_type: ($) => choice("%lo","%pcrel_lo","tprel_lo"),
+    relocation_load_store_type: ($) => 
+      token(
+        choice("%lo","%pcrel_lo","%tprel_lo")
+        ),
 
     string_literal: ($) =>
       seq(

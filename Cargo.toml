@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-riscvasm"
-version = "0.1.1"
+version = "0.1.2"
 keywords = ["parser","dev-tool"]
 edition = "2018"
 

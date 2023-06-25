@@ -336,6 +336,10 @@
           {
             "type": "SYMBOL",
             "name": "symbol_scope"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "operand_args"
           }
         ]
       }
@@ -660,21 +664,24 @@
       ]
     },
     "relocation_load_store_type": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "%lo"
-        },
-        {
-          "type": "STRING",
-          "value": "%pcrel_lo"
-        },
-        {
-          "type": "STRING",
-          "value": "tprel_lo"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "%lo"
+          },
+          {
+            "type": "STRING",
+            "value": "%pcrel_lo"
+          },
+          {
+            "type": "STRING",
+            "value": "%tprel_lo"
+          }
+        ]
+      }
     },
     "string_literal": {
       "type": "SEQ",
