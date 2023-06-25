@@ -28,15 +28,12 @@ module.exports = grammar({
         prec.left(1, $.label),
       ),
 
-    decl: ($) => prec.left(0,seq($.identifier,$.builtin_kw,$.integer_literal)),
+    decl: ($) => prec.left(0,seq($.builtin_kw,$.decl_value)),
 
-    builtin_kw: ($) =>
-      token(
-        prec(
-          1,
-          /dword|word|half|long/,
-        ),
-      ),
+    decl_value: ($) => choice($.integer_literal,$.string_literal),
+
+    builtin_kw: ($) => prec.left(0,seq($.data_type_keyword)),
+    data_type_keyword: ($) => choice(".2byte",".4byte",".8byte",".half",".word",".dword",".byte",".dtpreldword",".dtprelword",".sleb128",".uleb128",".asciz",".string",".incbin",".zero"),
 
     section: ($) => prec.left(0,seq($.section_name)), // section selection
     section_name: ($) => choice(".text",".data",".rodata",".bss"),
@@ -65,6 +62,7 @@ module.exports = grammar({
           $.integer_literal,
           $.operand_ident,
           $.addressing,
+          $.relocation_load_store,
         ),
       ),
 
@@ -108,6 +106,10 @@ module.exports = grammar({
       ),
 
     addressing: ($) => seq($._decimal_literal,'(',$.register,')'),
+
+
+    relocation_load_store: ($) => seq($.relocation_load_store_type,'(',$.label_name,')'),
+    relocation_load_store_type: ($) => choice("%lo","%pcrel_lo","tprel_lo"),
 
     string_literal: ($) =>
       seq(

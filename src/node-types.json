@@ -35,6 +35,26 @@
     }
   },
   {
+    "type": "builtin_kw",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "data_type_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "data_type_keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "decl",
     "named": true,
     "fields": {},
@@ -47,11 +67,26 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "decl_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "decl_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "integer_literal",
           "named": true
         },
         {
-          "type": "integer_literal",
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -219,6 +254,10 @@
           "named": true
         },
         {
+          "type": "relocation_load_store",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         }
@@ -242,6 +281,30 @@
   },
   {
     "type": "operand_ident",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "relocation_load_store",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_name",
+          "named": true
+        },
+        {
+          "type": "relocation_load_store_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "relocation_load_store_type",
     "named": true,
     "fields": {}
   },
@@ -332,6 +395,14 @@
     "named": false
   },
   {
+    "type": "%lo",
+    "named": false
+  },
+  {
+    "type": "%pcrel_lo",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -348,7 +419,23 @@
     "named": false
   },
   {
+    "type": ".2byte",
+    "named": false
+  },
+  {
+    "type": ".4byte",
+    "named": false
+  },
+  {
+    "type": ".8byte",
+    "named": false
+  },
+  {
     "type": ".align",
+    "named": false
+  },
+  {
+    "type": ".asciz",
     "named": false
   },
   {
@@ -360,7 +447,23 @@
     "named": false
   },
   {
+    "type": ".byte",
+    "named": false
+  },
+  {
     "type": ".data",
+    "named": false
+  },
+  {
+    "type": ".dtpreldword",
+    "named": false
+  },
+  {
+    "type": ".dtprelword",
+    "named": false
+  },
+  {
+    "type": ".dword",
     "named": false
   },
   {
@@ -380,7 +483,15 @@
     "named": false
   },
   {
+    "type": ".half",
+    "named": false
+  },
+  {
     "type": ".ident",
+    "named": false
+  },
+  {
+    "type": ".incbin",
     "named": false
   },
   {
@@ -404,11 +515,31 @@
     "named": false
   },
   {
+    "type": ".sleb128",
+    "named": false
+  },
+  {
+    "type": ".string",
+    "named": false
+  },
+  {
     "type": ".text",
     "named": false
   },
   {
     "type": ".type",
+    "named": false
+  },
+  {
+    "type": ".uleb128",
+    "named": false
+  },
+  {
+    "type": ".word",
+    "named": false
+  },
+  {
+    "type": ".zero",
     "named": false
   },
   {
@@ -418,10 +549,6 @@
   {
     "type": ">",
     "named": false
-  },
-  {
-    "type": "builtin_kw",
-    "named": true
   },
   {
     "type": "comment",
@@ -442,5 +569,9 @@
   {
     "type": "register",
     "named": true
+  },
+  {
+    "type": "tprel_lo",
+    "named": false
   }
 ]

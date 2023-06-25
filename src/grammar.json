@@ -163,29 +163,105 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "SYMBOL",
             "name": "builtin_kw"
           },
           {
             "type": "SYMBOL",
-            "name": "integer_literal"
+            "name": "decl_value"
           }
         ]
       }
     },
-    "builtin_kw": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "dword|word|half|long"
+    "decl_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "integer_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
         }
+      ]
+    },
+    "builtin_kw": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "data_type_keyword"
+          }
+        ]
       }
+    },
+    "data_type_keyword": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".2byte"
+        },
+        {
+          "type": "STRING",
+          "value": ".4byte"
+        },
+        {
+          "type": "STRING",
+          "value": ".8byte"
+        },
+        {
+          "type": "STRING",
+          "value": ".half"
+        },
+        {
+          "type": "STRING",
+          "value": ".word"
+        },
+        {
+          "type": "STRING",
+          "value": ".dword"
+        },
+        {
+          "type": "STRING",
+          "value": ".byte"
+        },
+        {
+          "type": "STRING",
+          "value": ".dtpreldword"
+        },
+        {
+          "type": "STRING",
+          "value": ".dtprelword"
+        },
+        {
+          "type": "STRING",
+          "value": ".sleb128"
+        },
+        {
+          "type": "STRING",
+          "value": ".uleb128"
+        },
+        {
+          "type": "STRING",
+          "value": ".asciz"
+        },
+        {
+          "type": "STRING",
+          "value": ".string"
+        },
+        {
+          "type": "STRING",
+          "value": ".incbin"
+        },
+        {
+          "type": "STRING",
+          "value": ".zero"
+        }
+      ]
     },
     "section": {
       "type": "PREC_LEFT",
@@ -427,6 +503,10 @@
             {
               "type": "SYMBOL",
               "name": "addressing"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "relocation_load_store"
             }
           ]
         }
@@ -555,6 +635,44 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "relocation_load_store": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "relocation_load_store_type"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "label_name"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "relocation_load_store_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "%lo"
+        },
+        {
+          "type": "STRING",
+          "value": "%pcrel_lo"
+        },
+        {
+          "type": "STRING",
+          "value": "tprel_lo"
         }
       ]
     },
