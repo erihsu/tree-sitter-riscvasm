@@ -99,7 +99,7 @@
       "members": [
         {
           "type": "PREC_LEFT",
-          "value": 4,
+          "value": 7,
           "content": {
             "type": "SYMBOL",
             "name": "ins"
@@ -107,10 +107,34 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 3,
+          "value": 6,
           "content": {
             "type": "SYMBOL",
             "name": "decl"
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 5,
+          "content": {
+            "type": "SYMBOL",
+            "name": "alignment"
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 4,
+          "content": {
+            "type": "SYMBOL",
+            "name": "symbol_def"
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 3,
+          "content": {
+            "type": "SYMBOL",
+            "name": "misc_func"
           }
         },
         {
@@ -194,6 +218,112 @@
         {
           "type": "STRING",
           "value": ".bss"
+        }
+      ]
+    },
+    "alignment": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "align_type"
+          }
+        ]
+      }
+    },
+    "align_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".align"
+        },
+        {
+          "type": "STRING",
+          "value": ".balign"
+        },
+        {
+          "type": "STRING",
+          "value": "p2align"
+        }
+      ]
+    },
+    "symbol_def": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "symbol_scope"
+          }
+        ]
+      }
+    },
+    "symbol_scope": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".globl"
+        },
+        {
+          "type": "STRING",
+          "value": ".local"
+        },
+        {
+          "type": "STRING",
+          "value": ".equ"
+        }
+      ]
+    },
+    "misc_func": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "misc_func_type"
+          }
+        ]
+      }
+    },
+    "misc_func_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ".option"
+        },
+        {
+          "type": "STRING",
+          "value": ".macro"
+        },
+        {
+          "type": "STRING",
+          "value": ".endm"
+        },
+        {
+          "type": "STRING",
+          "value": ".file"
+        },
+        {
+          "type": "STRING",
+          "value": ".ident"
+        },
+        {
+          "type": "STRING",
+          "value": ".size"
+        },
+        {
+          "type": "STRING",
+          "value": ".type"
         }
       ]
     },
@@ -293,6 +423,10 @@
             {
               "type": "SYMBOL",
               "name": "operand_ident"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "addressing"
             }
           ]
         }
@@ -402,6 +536,27 @@
           ]
         }
       }
+    },
+    "addressing": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_decimal_literal"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "register"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
     },
     "string_literal": {
       "type": "SEQ",

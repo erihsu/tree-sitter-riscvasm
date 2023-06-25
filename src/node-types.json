@@ -1,5 +1,40 @@
 [
   {
+    "type": "addressing",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "register",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "align_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "alignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "align_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "decl",
     "named": true,
     "fields": {},
@@ -31,6 +66,10 @@
       "required": true,
       "types": [
         {
+          "type": "alignment",
+          "named": true
+        },
+        {
           "type": "decl",
           "named": true
         },
@@ -43,7 +82,15 @@
           "named": true
         },
         {
+          "type": "misc_func",
+          "named": true
+        },
+        {
           "type": "section",
+          "named": true
+        },
+        {
+          "type": "symbol_def",
           "named": true
         }
       ]
@@ -128,6 +175,26 @@
     "fields": {}
   },
   {
+    "type": "misc_func",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "misc_func_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "misc_func_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "operand",
     "named": true,
     "fields": {},
@@ -135,6 +202,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "addressing",
+          "named": true
+        },
         {
           "type": "integer_literal",
           "named": true
@@ -229,6 +300,26 @@
     }
   },
   {
+    "type": "symbol_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "symbol_scope",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symbol_scope",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -241,11 +332,27 @@
     "named": false
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": "+",
     "named": false
   },
   {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": ".align",
+    "named": false
+  },
+  {
+    "type": ".balign",
     "named": false
   },
   {
@@ -257,11 +364,51 @@
     "named": false
   },
   {
+    "type": ".endm",
+    "named": false
+  },
+  {
+    "type": ".equ",
+    "named": false
+  },
+  {
+    "type": ".file",
+    "named": false
+  },
+  {
+    "type": ".globl",
+    "named": false
+  },
+  {
+    "type": ".ident",
+    "named": false
+  },
+  {
+    "type": ".local",
+    "named": false
+  },
+  {
+    "type": ".macro",
+    "named": false
+  },
+  {
+    "type": ".option",
+    "named": false
+  },
+  {
     "type": ".rodata",
     "named": false
   },
   {
+    "type": ".size",
+    "named": false
+  },
+  {
     "type": ".text",
+    "named": false
+  },
+  {
+    "type": ".type",
     "named": false
   },
   {
@@ -287,6 +434,10 @@
   {
     "type": "mnemonic",
     "named": true
+  },
+  {
+    "type": "p2align",
+    "named": false
   },
   {
     "type": "register",
